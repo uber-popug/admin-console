@@ -1,0 +1,10 @@
+.popug-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    column-gap: 1rem;
+}
+
+.popug-row .actual-task {
+    flex: 1;
+}
