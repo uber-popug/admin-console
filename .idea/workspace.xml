@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0aeee5f1-b259-49a3-824b-4fe311880535" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/browser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/van/van-1.5.0.debug.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/van/van-1.5.0.js" afterDir="false" />
+    <list default="true" id="0aeee5f1-b259-49a3-824b-4fe311880535" name="Changes" comment="add vsc settings">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +17,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "melanxoluk"
+  }
+}]]></component>
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
+  ]
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/uber-popug/admin-console",
+    "accountId": "8d69c557-bbb4-42b3-a0b6-8f163cd06d4e"
+  }
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 5
 }]]></component>
@@ -68,11 +79,33 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1710611669777</updated>
-      <workItem from="1710611670654" duration="7816000" />
+      <workItem from="1710611670654" duration="14686000" />
     </task>
+    <task id="LOCAL-00001" summary="wip setting popug admin console">
+      <option name="closed" value="true" />
+      <created>1710688450856</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710688450856</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add vsc settings">
+      <option name="closed" value="true" />
+      <created>1710688584649</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710688584649</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="wip setting popug admin console" />
+    <MESSAGE value="add vsc settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="add vsc settings" />
   </component>
 </project>

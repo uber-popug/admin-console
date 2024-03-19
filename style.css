@@ -5,6 +5,15 @@
     column-gap: 1rem;
 }
 
+.popug-row .popug-title {
+    flex: 2;
+}
 .popug-row .actual-task {
+    flex: 8;
+}
+.popug-row .tasks-amount {
+    flex: 1;
+}
+.popug-row .balance {
     flex: 1;
 }
