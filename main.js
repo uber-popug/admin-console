@@ -1,4 +1,6 @@
-import van from './van/van-1.5.0.debug.js'
+import van from './libs/van/van-1.5.0.debug.js'
+import vanx from './libs/van/vanx-0.4.0.js'
+import {nanoid} from "./libs/nanoid.js";
 
 const {form, input, h1, h3, strong, button, span, div, pre} = van.tags
 
@@ -7,60 +9,67 @@ function randomInteger(min, max) {
 }
 
 
-class Task {
-  constructor(title, popug, price) {
-    this.title = title
-    this.popug = popug
-    this.price = price
-  }
-}
-
 class Popug {
-  constructor(title, tasks, balance) {
+  constructor(id, title, tasks, balance) {
+    this.id = id
     this.title = title
-    this.tasks = van.state(tasks)
-    this.actualTask = van.derive(() => this.tasks.val[0] ?? {})
-    this.balance = van.state(balance)
-    van.derive(() => console.info(`Tasks: ${this.tasks.val}`))
-    van.derive(() => console.info(`Actual task: ${this.actualTask.val}`))
+    this.tasks = tasks
+    this.balance = balance
   }
 }
 
-
-const PopugRow = (popug) => {
-  return div({class: "popug-row"},
-    strong({class: "popug-title"}, popug.title),
-    strong({class: "actual-task"}, popug.actualTask.title),
-    strong({class: "tasks-amount"}, popug.tasks.val.length),
-    strong({class: "balance"}, popug.balance.val + "$")
-  )
+class Task {
+  constructor(title, price, assignedTo) {
+    this.title = title
+    this.price = price
+    this.assignedTo = assignedTo
+  }
 }
 
 
 const balance = van.state(100)
 
-const tasks = van.state([])
-van.derive(() => console.log(`tasks changed: ${tasks}`))
+const popugs = vanx.reactive({})
+const addPopug = (title) => {
+  popugs[title] = new Popug(nanoid(), title, [], 0)
+}
+addPopug("Pa")
+addPopug("Pb")
 
-const popugs = van.state([
-  new Popug("1", [], 0),
-  new Popug("2", [], 0),
-])
+const tasks = vanx.reactive([])
+const addTask = (title) => {
+  const length = Object.keys(popugs).length
+  const index = randomInteger(0, length - 1)
+  const rawPopugs = vanx.raw(popugs)
+  const rawPopug = Object.values(rawPopugs)[index]
+  const rawPopugTitle = rawPopug.title
+  const popug = popugs[rawPopugTitle]
+  console.info("add task", length, index, rawPopugs, rawPopug, rawPopugTitle, popugs, popug)
 
-const App = () => {
+  const task = new Task(title, 20, rawPopug.id)
+  tasks.push(task)
+  popug.tasks.push(task)
+}
+
+
+const PopugRow = (popug) => {
+  console.info("enter popug row", popug, popug.val)
+  return div({class: "popug-row"},
+    strong({class: "popug-title"}, popug.val.title),
+    strong({class: "actual-task"}, popug.val.actualTask),
+    strong({class: "tasks-amount"}, popug.val.amountTasks),
+    strong({class: "balance"}, popug.val.balance + "$")
+  )
+}
+
+const App = () => {  
   const taskInput = input({type: "text", placeholder: "Введите текст задачи"})
+  
   const onSubmit = (e) => {
     e.preventDefault()
     e.stopPropagation()
     const taskTitle = taskInput.value
-    const index = randomInteger(0, popugs.val.length - 1)
-    const assignedPopug = popugs.val[index]
-    const task = new Task(taskTitle, assignedPopug, 20)
-    console.info("onsubmit", index, popugs.val, assignedPopug, task)
-    assignedPopug.tasks.val.push(task)
-    assignedPopug.balance.val -= task.price
-    tasks.val = [...tasks.val, task]
-    console.info("onsubmit", task, assignedPopug, tasks)
+    addTask(taskTitle)
   }
 
   return div(
@@ -72,7 +81,7 @@ const App = () => {
       strong({class: "tasks-amount"}, "Всего задач"),
       strong({class: "balance"}, "Баланс")
     ),
-    div(popugs.val.map(PopugRow)),
+    vanx.list(div, popugs, p => PopugRow(p)),
     div(
       form(
         {onsubmit: onSubmit},
@@ -83,4 +92,27 @@ const App = () => {
   )
 }
 
-van.add(document.body, App())
+//van.add(document.body, App())
+
+
+class State {
+  constructor() {
+    this.text = vanx.reactive({title:"VanJS"})
+    this.length = vanx.calc(() => this.text.title.length)
+  }
+}
+
+const st = new State()
+
+const DerivedState = () => {
+  // const text = vanx.reactive({title:"VanJS"})
+  // const length = vanx.calc(() => text.title.length)
+    
+  return span(
+    "The length of ",
+    input({type: "text", value: st.text.title, oninput: e => st.text.title = e.target.value}),
+    " is ", st.length, ".",
+  )
+}
+
+van.add(document.body, DerivedState())
